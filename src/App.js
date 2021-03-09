@@ -127,6 +127,7 @@ function App() {
 				}
 			}
 		}
+
 		for(let num =  1; num <= size; num ++){
 			if(isSafeToUse(startRow, startCol, matrix, num)){
 				matrix[startRow][startCol] = num;
@@ -136,6 +137,7 @@ function App() {
 				matrix[startRow][startCol] = 0
 			}
 		}
+		return false;
 	}
 
 	const removeSomeCell = (matrix, k) => {
@@ -336,46 +338,45 @@ function App() {
 		}
 	}
 
-	// const handleKeyBoardEvent = (key) => {
-	
-	// 	let num = 0;
-	// 	switch (key) {
-	// 		case 49: case 97: 
-	// 			num = 1;
-	// 			break;
-	// 		case 50: case 98: 
-	// 			num = 2;
-	// 			break;
-	// 		case 51: case 99: 
-	// 			num = 3;
-	// 			break;
-	// 		case 52: case 100: 
-	// 			num = 4;
-	// 			break;
-	// 		case 53: case 101: 
-	// 			num = 5;
-	// 			break;
-	// 		case 54: case 102: 
-	// 			num = 6;
-	// 			break;
-	// 		case 55: case 103: 
-	// 			num = 7;
-	// 			break;
-	// 		case 56: case 104: 
-	// 			num = 8;
-	// 			break;
-	// 		case 57: case 105: 
-	// 			num = 9;
-	// 			break;
-	// 		case 48: case 96: 
-	// 			num = 0;
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-		
-	// 	playerInputNumber(num);
-	// }	
+	const handleKeyBoardEvent = (event) => {
+		let key = event.keyCode;
+		let num = 0;
+		switch (key) {
+			case 49: case 97: 
+				num = 1;
+				break;
+			case 50: case 98: 
+				num = 2;
+				break;
+			case 51: case 99: 
+				num = 3;
+				break;
+			case 52: case 100: 
+				num = 4;
+				break;
+			case 53: case 101: 
+				num = 5;
+				break;
+			case 54: case 102: 
+				num = 6;
+				break;
+			case 55: case 103: 
+				num = 7;
+				break;
+			case 56: case 104: 
+				num = 8;
+				break;
+			case 57: case 105: 
+				num = 9;
+				break;
+			case 48: case 96: 
+				num = 0;
+				break;
+			default:
+				break;
+		}
+		playerInputNumber(num);
+	}	
 
 	useEffect(() => {
 		init();
@@ -395,16 +396,12 @@ function App() {
 		}
 	},[time])
 
-	// useEffect(()=>{
-	// 	document.addEventListener("keydown", (event)=>{
-	// 		handleKeyBoardEvent(event.keyCode)
-	// 	})
-	// 	return () => {
-	// 		document.removeEventListener("keydown", (event)=>{
-	// 			handleKeyBoardEvent(event.keyCode)
-	// 		})
-	// 	}
-	// })
+	useEffect(()=>{
+		window.addEventListener("keydown", handleKeyBoardEvent)
+		return () => {
+			window.removeEventListener("keydown", handleKeyBoardEvent)
+		}
+	})
 
 	return (
 		<div className="container">
